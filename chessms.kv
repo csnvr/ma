@@ -1,0 +1,123 @@
+ScreenManager:
+    id: screen_manager
+    ScreenWelcome:
+        id: welcome_screen
+        name:'welcome_screen'
+    ScreenMain:
+        id: main_screen
+        name:'main_screen'
+    ScreenSettings:
+        id: settings_screen
+        name:'settings_screen'
+
+<ScreenWelcome>:
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: ''
+            color: 0.3,0.2,0.7
+
+        MDLabel:
+            id: welcome_text
+            halign: 'center'
+            text: 'Welcome to ChesSms!'
+            font_style: 'H3'
+            font: 'RobotoBlack'
+
+        MDLabel:
+            id: info_text
+            halign: 'center'
+            text: ''
+            font_style: 'Caption'
+
+        MDTextField:
+            id: phone_input
+            name: 'phone_input'
+            halign: 'center'
+            hint_text: 'Your phone number'
+            required: True
+            helper_text_mode: 'on_error'
+            helper_text: '[00386...]Phone number is essential for this game to run'
+            max_text_length: 13
+            color_mode: 'accent'
+            icon_right: 'phone'
+            multiline: False
+
+        MDIconButton:
+            name: 'welcome_button'
+            pos_hint: {"center_x": .5, "center_y": .5}
+            align: 'center'
+            icon: 'content-save-move-outline'
+            on_release:
+                root.welcome_button()
+
+
+<ScreenMain>:
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'ChesSms'
+            color: 0.3,0.2,0.7
+            right_action_items: [['settings',lambda x: root.settings()]]
+            left_action_items: [['phone', lambda x: root.welcome()]]
+
+        MDBottomNavigation:
+            panel_color: 0.4, 0.1, 0.2, 1
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Play'
+                icon: 'play'
+
+                MDLabel:
+                    text: 'Invite players to play chess'
+                    halign: 'center'
+
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Game'
+                icon: 'chess-knight'
+
+                MDLabel:
+                    text: 'Chess Game'
+                    halign: 'center'
+
+            MDBottomNavigationItem:
+                name: 'screen 3'
+                text: 'Achievements'
+                icon: 'medal'
+
+                MDLabel:
+                    text: 'Achievements'
+                    halign: 'center'
+
+<ScreenSettings>:
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'Settings'
+            color: 0.3,0.2,0.7
+            left_action_items: [['keyboard-backspace', lambda x: root.back()]]
+
+        MDGridLayout:
+            cols: 2
+
+            MDLabel:
+                text: 'Settings'
+                halign: 'center'
+
+            MDSwitch:
+                id: dark_mode_switch
+                text: "Toggle dark mode"
+                align: 'center'
+                on_release: print('dark mode')
+                on_press: print('light mode')
+
+
+
